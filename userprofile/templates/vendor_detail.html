@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block style %}
+
+<style>
+    body{
+    
+    
+    border-radius: 10px;
+
+}
+
+
+.cardd{
+  width: 600px;
+  border: none;
+  border-radius: 10px;
+   
+  background-color: #fff;
+}
+
+
+
+.stats{
+
+    background: #f2f5f8 !important;
+
+    color: #000 !important;
+}
+.articles{
+  font-size:10px;
+  color: #a1aab9;
+}
+.number1{
+  font-weight:500;
+}
+
+
+</style>
+{% endblock style %}
+
+
+{% block content %}
+
+
+<div class="container mt-5 d-flex justify-content-center">
+
+    <div class="cardd p-3">
+
+        <div class="d-flex align-items-center">
+
+            <div class="image">
+                {% if profile.image %}
+                <img src="{{ profile.image.url }}" class="rounded" width="155" >
+                {% endif %}
+
+            </div>
+
+        <div class="ml-3 w-100">
+            
+           <h4 class="mb-0 mt-0">{% firstof user.get_full_name user.username %}</h4>
+           <span><i class="fa-regular fa-envelope"></i>&nbsp;{{user.email}}</span><br>
+           <span><i class="fa-solid fa-phone"></i>&nbsp;{{profile.phone_number}}</span>
+
+           <div class="p-2 mt-2 bg-primary d-flex  rounded text-white stats">
+
+            <div class="d-flex flex-column ">
+
+                <span class="articles">Total Products</span>
+                <span class="number1">{{total_product_count}}</span>
+                
+            </div>
+               
+        </div>
+
+
+        </div>
+
+            
+        </div>
+        
+    </div>
+     
+ </div>
+
+<h4 class=" position-relative text-uppercase mx-xl-5 mb-4 mt-3"><span class="pr-3">{% firstof user.get_full_name user.username %} listed Product's</span></h4>
+
+<section class="py-2">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        {% for product in products  %}
+        <div class="col mb-5">
+            <div class="card h-100">
+                <!-- Product image-->
+                {% if product.image %}
+                <img class="card-img-top mb-5 mb-md-0" src="{{product.image.url}}" alt="..." style="height: 300px;"/>
+
+            {% endif %}
+                <!-- Product details-->
+                <div class="card-body p-4">
+                    <div class="text-center">
+                        <!-- Product name-->
+                        <h5 class="fw-bolder">{{product.title}}</h5>
+                        <!-- Product price-->
+                        {{product.price}}
+                    </div>
+                </div>
+                <!-- Product actions-->
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center"><a class="btn btn-dark mt-auto text-white" href="{% url 'product-detail' product.category.slug product.slug  %}">View options</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+           
+            
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

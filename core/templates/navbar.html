@@ -1,0 +1,43 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+    <div class="container px-4 px-lg-5">
+        <img class="rounded-circle" src="{% static 'img/Scrap Box (1).png' %}" width="5%">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'shop' %}">Shop</a></li>
+
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'myaccount' %}"><i
+                            class="fa-solid fa-user"></i>&nbsp;Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'mystore' %}">My Store</a></li>
+                <li><a href="{% url 'logout' %}" class="nav-link">Log out</a></li>
+
+
+                {% else %}
+
+                <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+
+
+
+
+            </ul>
+            <form class="d-flex">
+
+                <a href="{% url 'cart_summary' %}" class="btn btn-outline-dark"><i class="bi-cart-fill me-1">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        Cart
+                        </a>
+
+
+
+            </form>
+        </div>
+    </div>
+</nav>

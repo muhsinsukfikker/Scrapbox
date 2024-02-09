@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block style %}
+<style>
+    .content-section {
+        max-width: 400px;
+        /* Adjust the value as per your preference */
+        margin: auto;
+        /* Center the form horizontally */
+    }
+</style>
+{% endblock style %}
+{% block content %}
+<div class="container mt-5">
+    <div class="content-section">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">{{ title }} product</legend>
+                {{ form|crispy}}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Submit</button>
+            </div>
+        </form>
+
+        {% if title == 'Edit' %}
+        <a href="{% url 'delete-product' product.id %}" class="btn btn-outline-danger" type="submit">Delete</a>
+        {% endif %}
+
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% endblock content %}
